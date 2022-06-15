@@ -1,0 +1,25 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.title-container {
+  padding: 0 16px;
+  background-color: #0078d7;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-card,
+.title-container {
+  width: 40%;
+}
+
+h2 {
+  color: #fff;
+  font-weight: 500;
+}
