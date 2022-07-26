@@ -4,6 +4,7 @@ import {
   FormGroup,
   FormControl,
   NonNullableFormBuilder,
+  FormBuilder,
 } from '@angular/forms';
 import { CustomFormValidatorService } from '../services/custom-form-validator.service';
 
@@ -13,17 +14,22 @@ import { CustomFormValidatorService } from '../services/custom-form-validator.se
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
-  studentRegistrationForm!: FormGroup<StudentRegistration>;
-  submitted = false;
+  protected studentRegistrationForm!: FormGroup<StudentRegistration>;
+  protected submitted = false;
+
+  name = new FormControl('');
+  //name = new FormControl('', { nonNullable: true });
 
   constructor(
     private readonly formBuilder: NonNullableFormBuilder,
+    private readonly fb: FormBuilder,
     private readonly customFormValidator: CustomFormValidatorService
   ) {
     this.initializeForm();
   }
 
   private initializeForm(): void {
+    // this.studentRegistrationForm = this.fb.nonNullable.group(
     this.studentRegistrationForm = this.formBuilder.group(
       {
         firstName: ['', Validators.required],
@@ -42,7 +48,7 @@ export class RegistrationComponent {
           ],
         ],
         confirmPassword: ['', Validators.required],
-        age: [0, [Validators.required, Validators.min(14), Validators.max(25)]],
+        age: [0, [Validators.min(14), Validators.max(25)]],
       },
       {
         validators: [
@@ -55,39 +61,19 @@ export class RegistrationComponent {
     );
   }
 
-  onSubmit(): void {
+  protected onSubmit(): void {
     this.submitted = true;
     if (this.studentRegistrationForm.valid) {
       console.table(this.studentRegistrationForm.value);
     }
   }
 
-  get firstNameControl() {
-    return this.studentRegistrationForm.get('firstName');
+  protected resetForm() {
+    this.studentRegistrationForm.reset();
   }
 
-  get lastNameControl() {
-    return this.studentRegistrationForm.get('lastName');
-  }
-
-  get emailControl() {
-    return this.studentRegistrationForm.get('email');
-  }
-
-  get usernameControl() {
-    return this.studentRegistrationForm.get('username');
-  }
-
-  get passwordControl() {
-    return this.studentRegistrationForm.get('password');
-  }
-
-  get confirmPasswordControl() {
-    return this.studentRegistrationForm.get('confirmPassword');
-  }
-
-  get ageControl() {
-    return this.studentRegistrationForm.get('age');
+  protected get registrationFormControl() {
+    return this.studentRegistrationForm.controls;
   }
 }
 
