@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ValidatorFn,
-  AbstractControl,
-  ValidationErrors,
-  AsyncValidatorFn,
-} from '@angular/forms';
-import { delay, map, Observable, of } from 'rxjs';
+import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -45,27 +39,5 @@ export class CustomFormValidatorService {
         return null;
       }
     };
-  }
-
-  userNameValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return this.validateUserName(control.value).pipe(
-        map((duplicateUserAvailable) => {
-          if (duplicateUserAvailable) {
-            return { userNameNotAvailable: true };
-          } else {
-            return null;
-          }
-        })
-      );
-    };
-  }
-
-  /* A static array is used to validate the availability of user names.
-   *  Ideally it should be a service call to the server to search the value from a database.
-   */
-  private validateUserName(username: string): Observable<boolean> {
-    const userNameList = ['ankit', 'admin', 'superadmin'];
-    return of(userNameList.includes(username)).pipe(delay(1000));
   }
 }

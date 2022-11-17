@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  Validators,
-  FormGroup,
-  FormControl,
-  NonNullableFormBuilder,
-  FormBuilder,
-} from '@angular/forms';
+import { Validators, FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import { StudentRegistration } from '../models/studentRegistration';
 import { CustomFormValidatorService } from '../services/custom-form-validator.service';
+import { UserNameValidationService } from '../services/user-name-validation.service';
 
 @Component({
   selector: 'app-registration',
@@ -17,38 +13,42 @@ export class RegistrationComponent {
   protected studentRegistrationForm!: FormGroup<StudentRegistration>;
   protected submitted = false;
 
-  name = new FormControl('');
-  //name = new FormControl('', { nonNullable: true });
-
   constructor(
     private readonly formBuilder: NonNullableFormBuilder,
-    private readonly fb: FormBuilder,
-    private readonly customFormValidator: CustomFormValidatorService
+    private readonly customFormValidator: CustomFormValidatorService,
+    private readonly userNameValidationService: UserNameValidationService
   ) {
     this.initializeForm();
   }
 
   private initializeForm(): void {
-    // this.studentRegistrationForm = this.fb.nonNullable.group(
     this.studentRegistrationForm = this.formBuilder.group(
       {
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        username: [
-          '',
+        firstName: this.formBuilder.control('', Validators.required),
+        lastName: this.formBuilder.control('', Validators.required),
+        email: this.formBuilder.control('', [
           Validators.required,
-          this.customFormValidator.userNameValidator(),
-        ],
-        password: [
-          '',
-          [
-            Validators.required,
-            this.customFormValidator.passwordPatternValidator(),
+          Validators.email,
+        ]),
+        username: this.formBuilder.control('', {
+          asyncValidators: [
+            this.userNameValidationService.validate.bind(
+              this.userNameValidationService
+            ),
           ],
-        ],
-        confirmPassword: ['', Validators.required],
-        age: [0, [Validators.min(14), Validators.max(25)]],
+          validators: [Validators.required],
+          updateOn: 'blur',
+        }),
+        password: this.formBuilder.control('', [
+          Validators.required,
+          this.customFormValidator.passwordPatternValidator(),
+        ]),
+        confirmPassword: this.formBuilder.control('', Validators.required),
+        age: this.formBuilder.control(14, [
+          Validators.required,
+          Validators.min(14),
+          Validators.max(25),
+        ]),
       },
       {
         validators: [
@@ -64,25 +64,16 @@ export class RegistrationComponent {
   protected onSubmit(): void {
     this.submitted = true;
     if (this.studentRegistrationForm.valid) {
+      alert('Form submitted successfully!!!');
       console.table(this.studentRegistrationForm.value);
     }
   }
 
-  protected resetForm() {
+  protected resetForm(): void {
     this.studentRegistrationForm.reset();
   }
 
   protected get registrationFormControl() {
     return this.studentRegistrationForm.controls;
   }
-}
-
-interface StudentRegistration {
-  firstName: FormControl<string>;
-  lastName: FormControl<string>;
-  email: FormControl<string>;
-  username: FormControl<string>;
-  password: FormControl<string>;
-  confirmPassword: FormControl<string>;
-  age: FormControl<number>;
 }

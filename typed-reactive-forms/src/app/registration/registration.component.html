@@ -115,6 +115,13 @@
           <input matInput placeholder="Age" formControlName="age" />
           <mat-error
             *ngIf="
+           (registrationFormControl.age.touched || submitted) &&
+           registrationFormControl.age.errors?.['required']
+          "
+            >Age is required.
+          </mat-error>
+          <mat-error
+            *ngIf="
               (registrationFormControl.age.touched || submitted) && 
               (registrationFormControl.age.errors?.['min'] || registrationFormControl.age.errors?.['max'])
             "
@@ -139,5 +146,3 @@
     </mat-card-content>
   </mat-card>
 </div>
-
-<p>{{ studentRegistrationForm.value | json }}</p>
