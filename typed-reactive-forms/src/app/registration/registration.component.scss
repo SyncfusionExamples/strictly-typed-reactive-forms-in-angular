@@ -2,12 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 40px;
+  margin: 20px 0;
 }
 
 .title-container {
-  padding: 0 16px;
   background-color: #0078d7;
+  h1 {
+    margin: 16px;
+    color: #fff;
+    font-weight: normal;
+  }
 }
 
 .full-width {
@@ -16,10 +20,12 @@
 
 mat-card,
 .title-container {
-  width: 40%;
+  width: 50%;
 }
 
-h2 {
-  color: #fff;
-  font-weight: normal;
+mat-card-actions {
+  padding: 0;
+  .reset-button {
+    margin-left: 5px;
+  }
 }

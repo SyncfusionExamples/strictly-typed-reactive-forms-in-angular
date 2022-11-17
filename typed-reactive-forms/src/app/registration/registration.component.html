@@ -1,12 +1,13 @@
 <div class="form-container">
-  <div class="title-container mat-elevation-z4">
-    <h2>Student Registration</h2>
+  <div class="title-container">
+    <h1>Student Registration</h1>
   </div>
 
-  <mat-card class="mat-elevation-z2">
+  <mat-card>
     <mat-card-content>
       <form [formGroup]="studentRegistrationForm" (ngSubmit)="onSubmit()">
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>First name</mat-label>
           <input
             matInput
             placeholder="First name"
@@ -19,7 +20,8 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Last name</mat-label>
           <input matInput placeholder="Last name" formControlName="lastName" />
           <mat-error
             *ngIf="(registrationFormControl.lastName.touched || submitted) 
@@ -28,7 +30,8 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Email</mat-label>
           <input matInput placeholder="Email" formControlName="email" />
           <mat-error
             *ngIf="(registrationFormControl.email.touched || submitted) 
@@ -44,7 +47,8 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>User Name</mat-label>
           <input matInput placeholder="User Name" formControlName="username" />
           <mat-error
             *ngIf="
@@ -62,7 +66,8 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Password</mat-label>
           <input
             matInput
             type="password"
@@ -87,7 +92,8 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Confirm Password</mat-label>
           <input
             matInput
             type="password"
@@ -111,8 +117,14 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Age" formControlName="age" />
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Age</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="Age"
+            formControlName="age"
+          />
           <mat-error
             *ngIf="
            (registrationFormControl.age.touched || submitted) &&
@@ -129,15 +141,16 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-card-actions>
+        <mat-card-actions align="end">
           <button type="submit" mat-raised-button color="primary">
             Register
           </button>
           <button
+            class="reset-button"
             type="reset"
-            (click)="resetForm()"
             mat-raised-button
             color="warn"
+            (click)="resetForm()"
           >
             Reset
           </button>
