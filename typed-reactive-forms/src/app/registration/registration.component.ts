@@ -70,6 +70,7 @@ export class RegistrationComponent {
   }
 
   protected resetForm(): void {
+    this.submitted = false;
     this.studentRegistrationForm.reset();
   }
 

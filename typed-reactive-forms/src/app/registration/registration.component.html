@@ -3,159 +3,180 @@
     <h1>Student Registration</h1>
   </div>
 
-  <mat-card>
-    <mat-card-content>
-      <form [formGroup]="studentRegistrationForm" (ngSubmit)="onSubmit()">
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>First name</mat-label>
-          <input
-            matInput
-            placeholder="First name"
-            formControlName="firstName"
-          />
-          <mat-error
+  <div class="card-layout">
+    <div class="e-card">
+      <div class="e-card-content">
+        <form
+          [formGroup]="studentRegistrationForm"
+          (ngSubmit)="onSubmit()"
+          autocomplete="off"
+        >
+          <div class="e-input-section">
+            <ejs-textbox
+              placeholder="First name"
+              cssClass="e-outline"
+              floatLabelType="Auto"
+              formControlName="firstName"
+            ></ejs-textbox>
+          </div>
+          <div
             *ngIf="(registrationFormControl.firstName.touched || submitted) 
             && registrationFormControl.firstName.errors?.['required']"
-            >First name is required.
-          </mat-error>
-        </mat-form-field>
+            class="e-error"
+          >
+            First name is required.
+          </div>
 
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Last name</mat-label>
-          <input matInput placeholder="Last name" formControlName="lastName" />
-          <mat-error
+          <div class="e-input-section">
+            <ejs-textbox
+              placeholder="Last name"
+              cssClass="e-outline"
+              floatLabelType="Auto"
+              formControlName="lastName"
+            ></ejs-textbox>
+          </div>
+          <div
             *ngIf="(registrationFormControl.lastName.touched || submitted) 
             && registrationFormControl.lastName.errors?.['required']"
-            >Last name is required.
-          </mat-error>
-        </mat-form-field>
+            class="e-error"
+          >
+            Last name is required.
+          </div>
 
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Email" formControlName="email" />
-          <mat-error
+          <div class="e-input-section">
+            <ejs-textbox
+              placeholder="Email"
+              cssClass="e-outline"
+              floatLabelType="Auto"
+              formControlName="email"
+            ></ejs-textbox>
+          </div>
+          <div
             *ngIf="(registrationFormControl.email.touched || submitted) 
             && registrationFormControl.email.errors?.['required']"
-            >Email is required.
-          </mat-error>
-          <mat-error
-            *ngIf="
-            registrationFormControl.email.touched &&
-            registrationFormControl.email.errors?.['email']
-            "
-            >Enter a valid email address.
-          </mat-error>
-        </mat-form-field>
+            class="e-error"
+          >
+            Email is required.
+          </div>
+          <div
+            *ngIf="registrationFormControl.email.touched &&
+            registrationFormControl.email.errors?.['email']"
+            class="e-error"
+          >
+            Enter a valid email address.
+          </div>
 
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>User Name</mat-label>
-          <input matInput placeholder="User Name" formControlName="username" />
-          <mat-error
-            *ngIf="
-              ( registrationFormControl.username || submitted) &&
-              registrationFormControl.username.errors?.['required']
-            "
-            >User Name is required.
-          </mat-error>
-          <mat-error
-            *ngIf="
-            registrationFormControl.username.touched &&
-            registrationFormControl.username.errors?.['userNameNotAvailable']
-            "
-            >User Name is not available.
-          </mat-error>
-        </mat-form-field>
+          <div class="e-input-section">
+            <ejs-textbox
+              placeholder="User Name"
+              cssClass="e-outline"
+              floatLabelType="Auto"
+              formControlName="username"
+            ></ejs-textbox>
+          </div>
+          <div
+            *ngIf="(registrationFormControl.username.touched || submitted) 
+            && registrationFormControl.username.errors?.['required']"
+            class="e-error"
+          >
+            User Name is required.
+          </div>
+          <div
+            *ngIf="registrationFormControl.username.touched &&
+          registrationFormControl.username.errors?.['userNameNotAvailable']"
+            class="e-error"
+          >
+            User Name is not available.
+          </div>
 
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            type="password"
-            placeholder="Password"
-            formControlName="password"
-          />
-          <mat-error
-            *ngIf="
-              (registrationFormControl.password.touched || submitted) &&
-              registrationFormControl.password.errors?.['required']
-             "
-            >Password is required.
-          </mat-error>
-          <mat-error
-            *ngIf="
-            registrationFormControl.password &&
-            registrationFormControl.password.errors?.['invalidPassword']
-            "
+          <div class="e-input-section">
+            <ejs-textbox
+              type="password"
+              placeholder="Password"
+              cssClass="e-outline"
+              floatLabelType="Auto"
+              formControlName="password"
+            ></ejs-textbox>
+          </div>
+          <div
+            *ngIf="(registrationFormControl.password.touched || submitted) 
+            && registrationFormControl.password.errors?.['required']"
+            class="e-error"
+          >
+            Password is required.
+          </div>
+          <div
+            *ngIf="registrationFormControl.password &&
+            registrationFormControl.password.errors?.['invalidPassword']"
+            class="e-error"
           >
             Password should have minimum 8 characters, at least 1 uppercase
             letter, 1 lowercase letter and 1 number.
-          </mat-error>
-        </mat-form-field>
+          </div>
 
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Confirm Password</mat-label>
-          <input
-            matInput
-            type="password"
-            placeholder="Confirm Password"
-            formControlName="confirmPassword"
-          />
-          <mat-error
-            *ngIf="
-             (registrationFormControl.confirmPassword.touched || submitted) &&
-             registrationFormControl.confirmPassword.errors?.['required']
-            "
-            >Password is required.
-          </mat-error>
-          <mat-error
-            *ngIf="
-            registrationFormControl.confirmPassword.touched &&
-            registrationFormControl.confirmPassword.errors?.['passwordMismatch']
-            "
+          <div class="e-input-section">
+            <ejs-textbox
+              type="password"
+              placeholder="Confirm password"
+              cssClass="e-outline"
+              floatLabelType="Auto"
+              formControlName="confirmPassword"
+            ></ejs-textbox>
+          </div>
+          <div
+            *ngIf="(registrationFormControl.confirmPassword.touched || submitted) 
+            && registrationFormControl.confirmPassword.errors?.['required']"
+            class="e-error"
           >
-            Password do not match.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Age</mat-label>
-          <input
-            matInput
-            type="number"
-            placeholder="Age"
-            formControlName="age"
-          />
-          <mat-error
-            *ngIf="
-           (registrationFormControl.age.touched || submitted) &&
-           registrationFormControl.age.errors?.['required']
-          "
-            >Age is required.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              (registrationFormControl.age.touched || submitted) && 
-              (registrationFormControl.age.errors?.['min'] || registrationFormControl.age.errors?.['max'])
-            "
-            >Age should be greater than 14 years and less than 25 years.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-card-actions align="end">
-          <button type="submit" mat-raised-button color="primary">
-            Register
-          </button>
-          <button
-            class="reset-button"
-            type="reset"
-            mat-raised-button
-            color="warn"
-            (click)="resetForm()"
+            Confirm password is required.
+          </div>
+          <div
+            *ngIf="registrationFormControl.confirmPassword.touched &&
+            registrationFormControl.confirmPassword.errors?.['passwordMismatch']"
+            class="e-error"
           >
-            Reset
-          </button>
-        </mat-card-actions>
-      </form>
-    </mat-card-content>
-  </mat-card>
+            Passwords does not match.
+          </div>
+
+          <div class="e-input-section">
+            <ejs-textbox
+              type="number"
+              placeholder="Age"
+              cssClass="e-outline"
+              floatLabelType="Auto"
+              formControlName="age"
+            ></ejs-textbox>
+          </div>
+          <div
+            *ngIf="(registrationFormControl.age.touched || submitted) &&
+            registrationFormControl.age.errors?.['required']"
+            class="e-error"
+          >
+            Age is required.
+          </div>
+          <div
+            *ngIf="(registrationFormControl.age.touched || submitted) && 
+            (registrationFormControl.age.errors?.['min'] || registrationFormControl.age.errors?.['max'])"
+            class="e-error"
+          >
+            Age should be greater than 14 years and less than 25 years.
+          </div>
+
+          <div class="e-card-actions">
+            <button type="submit" ejs-button cssClass="e-success">
+              Register
+            </button>
+            <button
+              type="reset"
+              ejs-button
+              cssClass="e-warning reset-button"
+              (click)="resetForm()"
+            >
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

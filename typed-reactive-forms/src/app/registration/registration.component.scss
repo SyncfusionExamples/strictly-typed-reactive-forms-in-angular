@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0;
+  margin: 16px 0;
 }
 
 .title-container {
@@ -14,17 +14,20 @@
   }
 }
 
-.full-width {
-  width: 100%;
+.e-input-section {
+  margin: 10px 0;
 }
 
-mat-card,
+.card-layout,
 .title-container {
-  width: 50%;
+  width: 70%;
 }
 
-mat-card-actions {
-  padding: 0;
+.e-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 0;
+
   .reset-button {
     margin-left: 5px;
   }
