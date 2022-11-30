@@ -6,11 +6,7 @@
   <div class="card-layout">
     <div class="e-card">
       <div class="e-card-content">
-        <form
-          [formGroup]="studentRegistrationForm"
-          (ngSubmit)="onSubmit()"
-          autocomplete="off"
-        >
+        <form [formGroup]="studentRegistrationForm" (ngSubmit)="onSubmit()">
           <div class="e-input-section">
             <ejs-textbox
               placeholder="First name"
