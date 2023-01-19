@@ -20,7 +20,11 @@
 
 .card-layout,
 .title-container {
-  width: 50%;
+  width: 90%;
+
+  @media only screen and (min-width: 768px) {
+    width: 50%;
+  }
 }
 
 .e-card-actions {
@@ -31,4 +35,8 @@
   .reset-button {
     margin-left: 5px;
   }
+}
+
+.source-code {
+  margin: 10px 0;
 }
